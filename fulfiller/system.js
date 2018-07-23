@@ -26,7 +26,7 @@ async function getEmotions (req, res, next) {
 // get the link to download the CALVIN repo
 async function downloadRepo (req, res, next) {
   let text = 'Please click on the provided link to download my git repository. Have fun with it!'
-  let extras = "Download my innards: <a href='https://github.com/ethantanen/File-Share-API/zipball/master'>click me </a>"
+  let extras = "Download my innards: <a href='https://github.com/ethantanen/CALVIN/zipball/master'>click me </a>"
   let stream = await ply.talk(text)
   res.send({audio: stream, text: extras})
 }
