@@ -17,7 +17,7 @@ router.use(async (req, res, next) => {
   if (req.session.aid) {
     let text = 'It appears that you are already logged in. Please log off if you don\'t believe this to be the case'
     let stream = await ply.talk(text)
-    res.send({audio: stream, text: text})
+    res.send({audio: stream, text: text, meta: req.session.meta.FIRST_NAME + " " + req.session.meta.LAST_NAME})
   } else {
     next()
   }
@@ -55,7 +55,7 @@ router.post('/', async (req, res) => {
     let text = name + ' welcome back!'
     let stream = await ply.talk(text)
 
-    res.send({audio: stream, text: text})
+    res.send({audio: stream, text: text, meta: meta.FIRST_NAME + " " + meta.LAST_NAME})
   } else {
     // inform client that they are not in the system
     let text = 'You are not a user. Please sign up if you would like to continue our conversation.'

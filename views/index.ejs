@@ -45,6 +45,8 @@
         <div class="row">
           <!-- Respond to Prompts Form -->
           <img id="bull" alt="bulldog" src="bulldog.png">
+
+          <strong id="login">logged in as: </strong>
           <!-- Trigger/Open The Modal -->
           <button id="myBtn">
             <strong>i</strong>
@@ -60,9 +62,16 @@
             <input id="response" autocomplete="off" name="text" type="text" class="form-control" placeholder="Talk to Calvin">
           </div>
           <div class="col-xs-8 col-xs-offset-1 col-sm-3 col-sm-offset-0 col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
-            <br> <button id="conversation" type="submit" class="btn btn-success">Submit</button>
+            <br>
+            <button id="conversation" type="submit" class="btn btn-success">Submit</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2">
+        <a id="credits">Credits</a>
       </div>
     </div>
   </div>
@@ -118,6 +127,59 @@
             <li>Ask to download my repository</li>
             <li>Visit my feedback page by visiting the /feedback route</li>
             <li>Or lets just talk!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="creditModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="row" id="heading">
+        <span class="close">&times;</span>
+        <h2>CALVIN Was Created With the Help Of:</h2>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h2>APIs</h2>
+          <ul>
+            <li>ISS Location</li>
+            <li>Random Number Fact </li>
+            <li>Ron Swanson quote</li>
+            <li>Search Wiki</li>
+            <li> News API</li>
+            <li> Quotes Rest</li>
+            <li> Food to Fork</li>
+            <li> Icanhasdadjoke</li>
+            <li> Weather Map</li>
+          </ul>
+
+        </div>
+        <div class="col-sm-4">
+          <h2>APIs (cont)</h2>
+          <ul>
+            <li> Twilio (SMS text)</li>
+            <li>Andruxnet</li>
+            <li>Love Calculator</li>
+            <li>Dev.zomato.com</li>
+            <li>Microsoft Graph</li>
+            <li>Mapbox</li>
+            <li>Oxford Dictionaries</li>
+            <li>Slack</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h2>Other</h2>
+          <ul>
+            <li>The Interns</li>
+            <li>Stack Overflow</li>
+            <li>Udemy</li>
+            <li>Stephen Grider</li>
+            <li>npm</li>
+            <li>W3 Schools</li>
+            <li>AWS</li>
           </ul>
         </div>
       </div>

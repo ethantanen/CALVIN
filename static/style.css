@@ -2,7 +2,8 @@
   width: 100%;
   float: center;
   margin: auto;
-  margin-top: -2%;
+  margin-top: -1.5%;
+  margin-bottom: -3%;
 }
 
 #grass {
@@ -118,6 +119,11 @@
   width: 73.5%;
   float: right;
   padding: 6px 12px;
+  margin-top: -11%;
+}
+
+#credits {
+  float: right;
 }
 
 #response {
@@ -129,8 +135,17 @@
   position: absolute;
   width: 22%;
   z-index: 10;
-  right: 25px;
+  right: 27px;
   top: -27%;
+}
+
+#login {
+  position: absolute;
+  z-index: 5;
+  right: 40%;
+  top: -6%;
+  color: rgba(0, 0, 102, 0.65);
+  font-size: 20px;
 }
 
 #snap,
@@ -147,11 +162,11 @@
 }
 
 #snap {
-  width: 49%;
+  width: 48%;
 }
 
 #send {
-  width: 49%;
+  width: 48%;
 }
 
 #bulldog {
