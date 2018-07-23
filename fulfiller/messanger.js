@@ -5,7 +5,7 @@ const apis = require('../apis/index')
 async function sendSlackMessage (req, res, next) {
   if (req.session.extendedMessage) {
     req.session.extendedMessage = false
-    json = await apis.sendSlackMessage(req.session.slots.CHANNEL, req.session.msg)
+    let json = await apis.sendSlackMessage(req.session.slots.CHANNEL, req.session.msg)
     send(req, res, next, 'I have sent your message.')
   } else {
     req.session.extendedMessage = true
@@ -17,7 +17,7 @@ async function sendSlackMessage (req, res, next) {
 async function sendOutlookEmail (req, res, next) {
   if (req.session.extendedMessage) {
     req.session.extendedMessage = false
-    json = await apis.sendEmail(req.session.meta.FIRST_NAME + ' ' + req.session.meta.LAST_NAME, req.session.slots.RECIPIENT, req.session.msg)
+    let json = await apis.sendEmail(req.session.meta.FIRST_NAME + ' ' + req.session.meta.LAST_NAME, req.session.slots.RECIPIENT, req.session.msg)
     send(req, res, next, 'I have sent your email.')
   } else {
     req.session.extendedMessage = true
@@ -28,7 +28,7 @@ async function sendOutlookEmail (req, res, next) {
 async function sendSMS (req, res, next) {
   if (req.session.extendedMessage) {
     req.session.extendedMessage = false
-    json = await apis.sendSMS(req.session.slots.PHONENUM, req.session.msg)
+    let json = await apis.sendSMS(req.session.slots.PHONENUM, req.session.msg)
     send(req, res, next, json.text)
   } else {
     req.session.extendedMessage = true
@@ -38,7 +38,7 @@ async function sendSMS (req, res, next) {
 
 // generate audio response and send to client
 async function send (req, res, next, text) {
-  stream = await ply.talk(text)
+  let stream = await ply.talk(text)
   res.send({audio: stream, text: text})
 }
 

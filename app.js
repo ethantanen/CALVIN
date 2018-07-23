@@ -27,6 +27,23 @@ app.use(logger('dev'))
 app.use(cors())
 app.use(session({secret: 'calvinssecret'}))
 
+app.use((req, res, next) => {
+  console.log("SESSION:",req.session, "BODY:", req.body)
+  next()
+})
+
+// connect routers
+app.use('/addUser', add.router)
+app.use('/authenticate', rec.router)
+app.use('/conversation', con.router)
+app.use('/admin', admin.router)
+app.use('/feedback',feedback.router)
+
+// render homescreen
+app.get('/', (req, res) => {
+  res.render('index.ejs')
+})
+
 // begin https server on port 8000
 https.createServer({
   key: fs.readFileSync('./encryption/server.key'),
@@ -34,16 +51,4 @@ https.createServer({
 }, app).listen(8000, (err) => {
   if (err) { return console.log("Can't connect to port 8000.", err) }
   return console.log('Listening on port 8000')
-})
-
-// connect routers
-app.use('/authenticate', rec.router)
-app.use('/conversation', con.router)
-app.use('/addUser', add.router)
-app.use('/admin', admin.router)
-app.use('/feedback',feedback.router)
-
-// render homescreen
-app.get('/', (req, res) => {
-  res.render('index.ejs')
 })

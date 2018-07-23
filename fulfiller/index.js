@@ -35,7 +35,6 @@ async function fulfill (req, res, next) {
    * are roughly divided into entertainment, information, tools, messanger
    * and system related fulfillers.
    */
-
   functional = {
 
     // entertainment
@@ -69,19 +68,20 @@ async function fulfill (req, res, next) {
     'FindLastName': system.getUsersByName,
     'LogOff': system.logOff,
     'Emotions': system.getEmotions,
-    'Stop': system.stop
+    'Stop': system.stop,
+    'AddUser': system.addUser,
+
   }
 
   // fulfill intent or issue no intent found message
   if (Object.keys(simple).includes(req.session.intent)) {
     // intent requires a simple api get request
-    func = simple[req.session.intent]
-    json = await func()
+    let func = simple[req.session.intent]
+    let json = await func()
     send(req, res, next, json.text)
   } else if (Object.keys(functional).includes(req.session.intent)) {
     // function requires additional work and functions are defined below
-    console.log(req.session)
-    func = functional[req.session.intent]
+    let func = functional[req.session.intent]
     func(req, res, next)
   } else {
     // a handler does not exist for these intents
@@ -91,7 +91,7 @@ async function fulfill (req, res, next) {
 
 // generate audio response and send to client
 async function send (req, res, next, text) {
-  stream = await ply.talk(text)
+  let stream = await ply.talk(text)
   res.send({audio: stream, text: text})
 }
 

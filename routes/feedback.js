@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 
 router.get('/submit', (req, res) => {
 
-  msg = 'User Feedback: \n'
+  let msg = 'User Feedback: \n'
   msg += 'Name: ' + req.query.name + " " + req.query.surname + "\n"
   msg += 'Email: ' + req.query.email + "\n"
   msg += 'Message: ' + req.query.message + "\n"

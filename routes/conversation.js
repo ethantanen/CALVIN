@@ -11,14 +11,13 @@ const lex = require('../utilities/lexRuntime')
 // router object
 const router = require('express').Router()
 
-// add intents to this list to increase guest permissions
-const guestPermissions = ['AddUser','Joke','RonSwansonQuote',
-  'ISSLocation','RandomNumberFact','LoveCalculator','TodaysDate',
-  'Recipe','CheckWeather','Dictionary','Stop']
+// add intents to this prevent guest usage
+const guestRestrictions = ['GetTimeToDest', 'FileShare', 'SendSlack', 'SendEmail',
+      'SendSMS','FindJobTitle','DownloadRepo','FindEmail','FindJobTitle','LogOff']
 
 // authenticate users and route accordingly
 router.use((req, res, next) => {
-  console.log('authenticate conversation')
+  console.log('authenticate conversation', req.session.guestaid)
   if (req.session.aid) {
     // is user
     user(req, res, next)
@@ -44,40 +43,16 @@ function user (req, res, next) {
   }
 }
 
-async function guest (req, res, next) {
-  // grab conversation information
-  id = req.session.guestaid
-  text = req.body.text
-
-  // make lex request
-  lexRes = await lex.postContent(id, text)
-
-  // execute this block if the user has permission to do so
-  if (guestPermissions.includes(lexRes.intentName)) {
-    // return meta data if CreateUser intent is finished gathering information
-    if (lexRes.intentName === 'AddUser' && lexRes.dialogState === 'Fulfilled') {
-      response = 'Please send me an image to complete the registration process. You will need to send the image after signup is complete to login'
-      stream = await ply.talk(response)
-      res.send({audio: stream, text: response, meta: lexRes.slots})
-    } else {
-      send(req, res, next, lexRes.message)
-    }
-  } else {
-    // return a message that ellicits the users login or account creation
-    response = "It appears that you do not have permission to make that request. Please login or create an account to access. To login, please snap and then send a photo. To create an account type 'signup'"
-    send(req, res, next, response)
-  }
-}
-
 // send text to chatbot and fulfill request when necessary
 async function lexChat (req, res, next) {
   // extract user info from session
-  id = req.session.id
-  text = req.body.text
-  meta = req.session.meta
+  let id = req.session.id
+  let text = req.body.text
+  let meta = req.session.meta
 
   // send text to lex chatbot
-  lexRes = await lex.postContent(id, text)
+  let lexRes = await lex.postContent(id, text)
+
   // check if entries are ready for fulfillment
   if (lexRes.dialogState === 'ReadyForFulfillment') {
     // fulfill request
@@ -90,6 +65,45 @@ async function lexChat (req, res, next) {
   }
 }
 
+// chat with lex with guest permissions
+async function guest (req, res, next) {
+  // grab conversation information
+  let id = req.session.guestaid
+  let text = req.body.text
+
+  // make lex request
+  let lexRes = await lex.postContent(id, text)
+
+  // execute this block if the user has permission to do so
+  if (!guestRestrictions.includes(lexRes.intentName)) {
+
+    // return meta data if CreateUser intent is finished gathering information
+    if (lexRes.intentName === 'AddUser' && lexRes.dialogState === 'ReadyForFulfillment' ) {
+      // prompt user to send in an image to complete registration process
+      let response = 'Please send me an image to complete the registration process. You will need to send the image after signup is complete to login'
+      let stream = await ply.talk(response)
+      res.send({audio: stream, text: response, meta: lexRes.slots})
+    } else {
+      // check if intent is ready for fulfillment else send lex response back to user
+      if (lexRes.dialogState === 'ReadyForFulfillment') {
+        // populate session with necessary information and send to fulfiller
+        req.session.intent = lexRes.intentName
+        req.session.slots = lexRes.slots
+        fulfiller.fulfill(req, res, next)
+      } else {
+        // send lex response back to client
+        console.log(lexRes)
+        send(req, res, next, lexRes.message)
+      }
+    }
+  } else {
+    // return a message that ellicits the users login or account creation
+    let response = "It appears that you do not have permission to make that request. Please login or create an account to access. To login, please snap and then send a photo. To create an account type 'signup'"
+    send(req, res, next, response)
+  }
+}
+
+// create audio stream from text and send to client
 async function send (req, res, next, text) {
   stream = await ply.talk(text)
   res.send({audio: stream, text: text})

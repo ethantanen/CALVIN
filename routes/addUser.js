@@ -19,13 +19,13 @@ const NAME = process.env.NAME
 // check if user is already in the system
 router.use(async (req, res, next) => {
   // check if face is already in collection
-  image = new Buffer(req.body.image.split(',')[1], 'base64')
-  check = await rk.searchFacesByImage64(NAME, image)
+  let image = new Buffer(req.body.image.split(',')[1], 'base64')
+  let check = await rk.searchFacesByImage64(NAME, image)
 
   // respond with an error message if the user is already in the system
   if (check.FaceMatches.length > 0) {
-    text = 'It appears that you are already in the system. Please login to continue.'
-    stream = await ply.talk(text)
+    let text = 'It appears that you are already in the system. Please login to continue.'
+    let stream = await ply.talk(text)
     res.send({audio: stream, text: text})
   } else {
     next()
@@ -38,22 +38,22 @@ router.post('/', async (req, res) => {
 
   try {
     // retrieve the users meta data and profile picture from request object
-    meta = req.body.meta
-    image = new Buffer(req.body.image.split(',')[1], 'base64')
+    let meta = req.body.meta
+    let image = new Buffer(req.body.image.split(',')[1], 'base64')
 
     // add user to database
-    user = await addUser64(NAME, image)
+    let user = await addUser64(NAME, image)
 
     // respond with a confirmation
-    text = user.FIRST_NAME + ' added to the system.'
-    stream = await ply.talk(text)
+    let text = user.FIRST_NAME + ' added to the system.'
+    let stream = await ply.talk(text)
     res.send({audio: stream, text: text})
     console.log('user successfully added to calvin\'s system...')
   } catch (err) {
     // log the error and return an error message
     console.log(err)
-    text = 'I was unable to add you to the system.'
-    stream = await ply.talk(text)
+    let text = 'I was unable to add you to the system.'
+    let stream = await ply.talk(text)
     res.send({audio: stream, text: text})
   }
 })
@@ -72,7 +72,7 @@ async function addUser64 (collection, buffer) {
       throw new Error('no face in image')
     })
 
-    // concatenate the face id with the metadata
+  // concatenate the face id with the metadata
   let id = face.FaceRecords[0].Face.FaceId
   let userData = {...{USER_ID: id}, ...meta}
 
