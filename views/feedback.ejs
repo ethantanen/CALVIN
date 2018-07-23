@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="bootstrap.css">
+<h1> Give us some feedback. We'd love to hear from you!!! </h1>
+<h5> We'd love to hear about any suggestions, criticism, bugs, you name it! </h5>
+
+<form id="contact-form" method="GET" action="/feedback/submit">
+
+  <div class="messages"></div>
+
+  <div class="controls">
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_name">Firstname </label>
+          <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname "  data-error="Firstname is required.">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_lastname">Lastname </label>
+          <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Please enter your lastname "  data-error="Lastname is required.">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_email">Email </label>
+          <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email "  data-error="Valid email is required.">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="form_phone">Phone</label>
+          <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your phone">
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label for="form_message">Message </label>
+          <textarea id="form_message" name="message" class="form-control" placeholder="Message for me " rows="4"  data-error="Please,leave us a message."></textarea>
+          <div class="help-block with-errors"></div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <input type="submit" class="btn btn-success btn-send" value="Send message">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <br>
+        <p class="text-muted">Head back to <a href='/'>CALVIN</a>
+        <p class="text-muted">Contact form template by <a href="http://bootstrapious.com" target="_blank">Bootstrapious</a>.</p>
+      </div>
+    </div>
+  </div>

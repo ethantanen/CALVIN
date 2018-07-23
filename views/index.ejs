@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> CALVIN </title>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://www.desmos.com/api/v1.1/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+  <script src="script.js"></script>
+</head>
+
+<body style="background-color: lightgray">
+  <div class="container">
+    <!-- Begin Calvin Header -->
+    <div class="row" id="top">
+      <div class="col-xs-8 col-xs-offset-2 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-3 col-lg-offset-0">
+        <img id="image" alt="calvin" src='calvinLogo.jpg'>
+      </div>
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-9"></div>
+    </div>
+    <!-- End Calvin Header -->
+
+    <div class="row" id="container">
+
+      <!-- Begin Video Elements -->
+      <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-3 col-lg-offset-0">
+        <div class="row" id="fill">
+          <div class="photo">
+            <video id="videos" autoplay></video>
+          </div>
+          <div class="photo">
+            <canvas id="canvas" width=277 height=204></canvas>
+            <img id="bulldog" src="bulldog.jpg"></img>
+          </div>
+          <div id="buttons">
+            <button id="snap" class="btn btn-primary">Snap Photo</button>
+            <button id="send" class="btn btn-success">Send Photo</button>
+          </div>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1"></div>
+      </div>
+      <!-- End Video Elements -->
+      <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-9 col-lg-offset-0">
+        <div class="row">
+          <!-- Respond to Prompts Form -->
+          <img id="bull" alt="bulldog" src="bulldog.png">
+          <!-- Trigger/Open The Modal -->
+          <button id="myBtn">
+            <strong>i</strong>
+          </button>
+          <div id="response-box">
+            <div id="scrollList" style="width:100%;height:390px;overflow-y: auto; flex-grow: 1">
+              <li id="thingToAppend" style="list-style: none;"></li>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-11 col-sm-9 col-md-9 col-lg-9">
+            <input id="response" autocomplete="off" name="text" type="text" class="form-control" placeholder="Talk to Calvin">
+          </div>
+          <div class="col-xs-8 col-xs-offset-1 col-sm-3 col-sm-offset-0 col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
+            <br> <button id="conversation" type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- The Modal -->
+  <div id="helpModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="row" id="heading">
+        <span class="close">&times;</span>
+        <h2>Calvin Commands:</h2>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h5> Guest Permissions: </h5>
+          <ul>
+            <li>Ask to join!</li>
+            <li>Check the weather</li>
+            <li>Look up a definition</li>
+            <li>Find out where the ISS is</li>
+            <li>Ask me for a joke</li>
+            <li>Try out my love calculator</li>
+            <li>Ask me for a random number fact</li>
+            <li>Look up a tasty recipe</li>
+            <li>Listen to a Ron Swanson quote</li>
+            <li>Find out todays date</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h5> User Permissions: </h5>
+          <ul>
+            <li>Search Wikipedia</li>
+            <li>Determine the time it would take to drive anywhere</li>
+            <li>Ask me for the news</li>
+            <li>Search for restaurant info</li>
+            <li>Ask me for a random number</li>
+            <li>Ask me about your appearance</li>
+            <li>Send an email</li>
+            <li>Send a message via slack</li>
+            <li>Send an SMS, supports (202) 422-4926 (beta)</li>
+          </ul>
+        </div>
+        <div class="col-sm-4">
+          <h5></h5>
+          <ul>
+            <li>Find another user with a particular position. i.e. Technical Consultant</li>
+            <li>Determine the email of another user by querying their name</li>
+            <li>Pull up a graphing or scientific calculator</li>
+            <li>Use my file sharing software</li>
+            <li>Stop an intent midway through dictation</li>
+            <li>Ask to download my repository</li>
+            <li>Visit my feedback page by visiting the /feedback route</li>
+            <li>Or lets just talk!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <button style="display: none" id="makeTextBox"></button>
+  <audio id="audio"> </audio>
+</body>
+
+</html>
