@@ -92,5 +92,6 @@ module.exports = {
   getPersonalInformation: getPersonalInformation,
   downloadRepo: downloadRepo,
   getEmotions: getEmotions,
-  logOff: logOff
+  logOff: logOff,
+  addUser: addUser,
 }
