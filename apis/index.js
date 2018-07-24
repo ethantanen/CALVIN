@@ -4,6 +4,7 @@ const random = require('./random')
 const slack = require('./slack')
 const dictionary = require('./dictionary')
 const twilio = require('./twilio')
+const wikipedia = require('./Wikipedia')
 
 module.exports = {
 
@@ -15,7 +16,7 @@ module.exports = {
   getChuckNorrisFact: random.getChuckNorrisFact,
   getRandomNumberFact: random.getRandomNumberFact,
   getRonSwansonQuote: random.getRonSwansonQuote,
-  searchWiki: random.searchWiki,
+  searchWiki: wikipedia.searchWiki,
   getTheNews: random.getTheNews,
   getQuoteOfTheDay: random.getQuoteOfTheDay,
   getQuote: random.getQuote,
